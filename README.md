@@ -17,7 +17,7 @@ A simple WinForms application that turns off your monitor after a specified time
 
 ## How to Use 
 1. **Download** and **run** the  `MonitorControl.exe`
-2. **Set** your desired time (e.g., "30 minutes")
+2. **Set** your desired time (ex: "30 minutes")
 3. **Click Start** - your monitor will turn off when time elapses
 
 ## Disclaimer ⚠
