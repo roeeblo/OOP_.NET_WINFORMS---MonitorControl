@@ -1,0 +1,9 @@
+C:\Users\User\source\repos\MonitorControl\MonitorControl\bin\Debug\MonitorControl.exe.config
+C:\Users\User\source\repos\MonitorControl\MonitorControl\bin\Debug\MonitorControl.exe
+C:\Users\User\source\repos\MonitorControl\MonitorControl\bin\Debug\MonitorControl.pdb
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.Properties.Resources.resources
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.csproj.GenerateResource.cache
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.exe
+C:\Users\User\source\repos\MonitorControl\MonitorControl\obj\Debug\MonitorControl.pdb
