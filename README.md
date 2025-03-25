@@ -2,10 +2,11 @@
 
 A simple WinForms application that turns off your monitor after a specified time.
 
+![image](https://github.com/user-attachments/assets/7ae323db-f824-4a2e-8254-7466f98c60c6)
+
+
 ## Personal Note
 My old monitor had a built-in option for a timer. After changing my monitor, because the old one broke down, i had to come up with an idea, so i decided to make this app. Hope anyone who struggled like me will find it simple and helpful.
-
-![image](https://github.com/user-attachments/assets/7ae323db-f824-4a2e-8254-7466f98c60c6)
 
 
 ## Features 
