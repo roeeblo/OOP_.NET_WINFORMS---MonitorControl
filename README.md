@@ -1,6 +1,7 @@
 # Monitor Shutdown Timer 🕒⚡
 
 A simple WinForms application that turns off your monitor after a specified time.
+
 ![image](https://github.com/user-attachments/assets/7ae323db-f824-4a2e-8254-7466f98c60c6)
 
 **
