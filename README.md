@@ -26,3 +26,5 @@ My old monitor had a built-in option for a timer. After changing to a new monito
 
 ## Disclaimer ⚠
 Use at your own risk. The developer is not responsible for any unintended effects.
+virus scan clear:
+![image](https://github.com/user-attachments/assets/20d69835-c1eb-42e0-bd34-da3a52f9046d)
