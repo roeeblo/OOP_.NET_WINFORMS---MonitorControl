@@ -22,7 +22,7 @@ My old monitor had a built-in option for a timer. After changing to a new monito
 ## How to Use 
 1. **Download** and **run** the  `MonitorControl.exe`
 2. **Set** your desired time (ex: "30 minutes")
-3. **Click Start** - your monitor will turn off when time elapses
+3. **Click Start Timer** - your monitor will turn off when time elapses
 
 ## Disclaimer ⚠
 Use at your own risk. The developer is not responsible for any unintended effects.
