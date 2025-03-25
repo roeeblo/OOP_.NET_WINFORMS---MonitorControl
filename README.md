@@ -12,7 +12,8 @@ A simple WinForms application that turns off your monitor after a specified time
 - Lightweight (no installation needed)
 
 
-![image](https://github.com/user-attachments/assets/de46e9b4-ffc5-471f-8936-e37c05a49a35)
+![image](https://github.com/user-attachments/assets/b37e6ff2-c3df-43c5-a414-225b130a64a6)
+
 
 ## How to Use 
 1. **Download** and **run** the  `MonitorControl.exe`
