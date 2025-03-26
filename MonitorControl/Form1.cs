@@ -7,26 +7,15 @@ namespace MonitorControlTimer
 {
     public partial class Form1 : Form
     {
-        [DllImport("dxva2.dll", SetLastError = true)]
-        private static extern bool GetPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, uint dwPhysicalMonitorArraySize, [Out] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
-
-        [DllImport("dxva2.dll", SetLastError = true)]
-        private static extern bool SetVCPFeature(IntPtr hMonitor, byte bVCPCode, uint dwNewValue);
-
-        [DllImport("dxva2.dll", SetLastError = true)]
-        private static extern bool DestroyPhysicalMonitors(uint dwPhysicalMonitorArraySize, [In] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
-
         [DllImport("user32.dll")]
-        private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+        private static extern void SendMessage(int hWnd, int hMsg, int wParam, int lParam);
 
-        private const int MONITOR_DEFAULTTOPRIMARY = 0x00000001;
-        private const byte VCP_CODE_POWER_MODE = 0xD6;
-        private const uint POWER_MODE_OFF = 0x04;
+        private const int WM_SYSCOMMAND = 0x0112;
+        private const int SC_MONITORPOWER = 0xF170;
+        private const int MONITOR_OFF = 2;
 
-        private bool monitorsInitialized = false;
         private System.Timers.Timer shutdownTimer;
         private int m_remainingSeconds;
-        private PHYSICAL_MONITOR[] physicalMonitors;
 
         public Form1()
         {
@@ -38,34 +27,10 @@ namespace MonitorControlTimer
 
             shutdownTimer = new System.Timers.Timer(1000);
             shutdownTimer.Elapsed += ShutdownTimer_Elapsed;
-            shutdownTimer.AutoReset = true; // Run repeatedly until stopped
+            shutdownTimer.AutoReset = true;
 
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-
-            // Initialize physical monitors
-            InitializePhysicalMonitors();
-        }
-
-        private void InitializePhysicalMonitors()
-        {
-            try
-            {
-                IntPtr hMonitor = MonitorFromWindow(this.Handle, MONITOR_DEFAULTTOPRIMARY);
-                physicalMonitors = new PHYSICAL_MONITOR[1];
-
-                monitorsInitialized = GetPhysicalMonitorsFromHMONITOR(hMonitor, 1, physicalMonitors);
-
-                if (!monitorsInitialized)
-                {
-                    MessageBox.Show("Monitor control not available. Timer will run but won't turn off monitor.");
-                }
-            }
-            catch (Exception ex)
-            {
-                monitorsInitialized = false;
-                MessageBox.Show($"Monitor init failed: {ex.Message}");
-            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -73,14 +38,7 @@ namespace MonitorControlTimer
             int timeValue = (int)numTime.Value;
             string timeUnit = comboBoxTime.SelectedItem.ToString();
 
-            if (timeUnit == "Minutes")
-            {
-                m_remainingSeconds = timeValue * 60;
-            }
-            else
-            {
-                m_remainingSeconds = timeValue;
-            }
+            m_remainingSeconds = timeUnit == "Minutes" ? timeValue * 60 : timeValue;
 
             if (m_remainingSeconds > 0)
             {
@@ -138,34 +96,7 @@ namespace MonitorControlTimer
 
         private void TurnOffMonitor()
         {
-            if (physicalMonitors != null && physicalMonitors.Length > 0)
-            {
-                foreach (var monitor in physicalMonitors)
-                {
-                    if (!SetVCPFeature(monitor.hPhysicalMonitor, VCP_CODE_POWER_MODE, POWER_MODE_OFF))
-                    {
-                        MessageBox.Show("Failed to turn off the monitor.");
-                    }
-                }
-            }
-        }
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            base.OnFormClosed(e);
-
-            if (physicalMonitors != null && physicalMonitors.Length > 0)
-            {
-                DestroyPhysicalMonitors((uint)physicalMonitors.Length, physicalMonitors);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        private struct PHYSICAL_MONITOR
-        {
-            public IntPtr hPhysicalMonitor;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-            public string szPhysicalMonitorDescription;
+            SendMessage(this.Handle.ToInt32(), WM_SYSCOMMAND, SC_MONITORPOWER, MONITOR_OFF);
         }
     }
 }
